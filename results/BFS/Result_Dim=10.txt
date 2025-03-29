@@ -1,0 +1,14 @@
+Solution found:
+x1: True
+x2: False
+x3: False
+x4: True
+x5: False
+x6: False
+x7: True
+x8: False
+x9: True
+x10: False
+Cost (Satisfied clauses): 40 / 40
+Expanded Nodes: 11
+Running Time: 0 sec
