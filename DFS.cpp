@@ -5,17 +5,19 @@
 #include <cstring>
 #include <vector>
 #include <filesystem>
+#include <chrono>
 
 using namespace std;
+using namespace std::chrono;
 namespace fs = std::filesystem;
 
 int D = 0, clauseCount = 0;
 int clauses[1000][3];
 int solution[100];
 long long expandedNodes = 0;
+long long totalClauseChecks = 0;  // ✓ Total checks in all stages
 bool found = false;
 
-// 從檔名中擷取 D 值（如 Dim=30）
 int catchDimFromFilename(const string& filename) {
     size_t pos = filename.find("Dim=");
     if (pos == string::npos) return -1;
@@ -25,39 +27,38 @@ int catchDimFromFilename(const string& filename) {
     return stoi(dimStr);
 }
 
-// Early Pruning：只在三個變數都已 assign 且都為 false 時才剪枝
+bool checkClause(int a, int b, int c) {
+    totalClauseChecks++;
+    int valA = (a > 0) ? solution[a - 1] : -solution[-a - 1];
+    int valB = (b > 0) ? solution[b - 1] : -solution[-b - 1];
+    int valC = (c > 0) ? solution[c - 1] : -solution[-c - 1];
+    return (valA == 1 || valB == 1 || valC == 1);
+}
+
 bool isClauseStillPossible(int a, int b, int c, int depth) {
+    totalClauseChecks++;
     bool unknown = false;
     for (int i = 0; i < 3; ++i) {
         int lit = (i == 0) ? a : (i == 1) ? b : c;
         int idx = abs(lit) - 1;
         if (idx >= depth) {
-            unknown = true;  // 還沒 assign，不能下定論
+            unknown = true;
             continue;
         }
         int val = solution[idx];
         if ((lit > 0 && val == 1) || (lit < 0 && val == -1)) {
-            return true; // 至少一個為真，Clause 可滿足
+            return true;
         }
     }
-    return unknown;  // 有未 assign → 保留可能性
+    return unknown;
 }
 
-// 若任何子句必定無法滿足，則剪枝
 bool earlyPruningFails(int depth) {
     for (int i = 0; i < clauseCount; ++i) {
         if (!isClauseStillPossible(clauses[i][0], clauses[i][1], clauses[i][2], depth))
             return true;
     }
     return false;
-}
-
-// 檢查最終整組變數是否滿足所有子句
-bool checkClause(int a, int b, int c) {
-    int valA = (a > 0) ? solution[a - 1] : -solution[-a - 1];
-    int valB = (b > 0) ? solution[b - 1] : -solution[-b - 1];
-    int valC = (c > 0) ? solution[c - 1] : -solution[-c - 1];
-    return (valA == 1 || valB == 1 || valC == 1);
 }
 
 int satisfiedClauses() {
@@ -68,7 +69,6 @@ int satisfiedClauses() {
     return satisfied;
 }
 
-// DFS + Early Pruning（原始變數順序）
 bool dfs(int index) {
     expandedNodes++;
     if (index == D) {
@@ -90,12 +90,13 @@ bool dfs(int index) {
 }
 
 int main() {
+    auto start = high_resolution_clock::now();
     string fileName;
-    string defaultPath = "./data/3SAT_Dim=10.csv"; 
-    cout << "CSV file path ( press enter for the default path: \"" << defaultPath <<  "\"): ";
+    string defaultPath = "./data/3SAT_Dim=10.csv";
+    cout << "CSV file path ( press enter for the default path: \"" << defaultPath << "\"): ";
     getline(cin, fileName);
     if (fileName.empty()) fileName = defaultPath;
-    
+
     fs::path outDir = "results/DFS";
     if (!fs::exists(outDir)) {
         fs::create_directories(outDir);
@@ -109,7 +110,7 @@ int main() {
 
     ifstream fin(fileName);
     if (!fin) {
-        cout << "Error opening file:" << fileName << endl;
+        cout << "Error opening file: " << fileName << endl;
         return 1;
     }
 
@@ -123,28 +124,33 @@ int main() {
     }
     fin.close();
 
-    clock_t start = clock();
     bool isFound = dfs(0);
-    clock_t end = clock();
-    double runningTime = (double)(end - start) / CLOCKS_PER_SEC;
     int cost = satisfiedClauses();
 
-    string resultFile = ( outDir / ("Result_Dim=" + to_string(D) + ".txt")).string();
+    string resultFile = (outDir / ("Result_Dim=" + to_string(D) + ".txt")).string();
     ofstream fout(resultFile);
 
     if (isFound) {
-        fout << "Solution found:" << endl;
+        fout << "Answer Found:\n";
         for (int i = 0; i < D; i++)
-            fout << "x" << (i + 1) << ": " << (solution[i] == 1 ? "True" : "False") << endl;
+            fout << "\tx" << (i + 1) << ": " << (solution[i] == 1 ? "True" : "False") << endl;
+
+        fout << "-- Vector View:\n\t{ ";
+        for (int i = 0; i < D; i++)
+            fout << (solution[i] == 1 ? "1 " : "0 ");
+        fout << "}" << endl;
     } else {
         fout << "No solution found." << endl;
     }
 
-    fout << "Cost (Satisfied clauses): " << cost << " / " << clauseCount << endl;
-    fout << "Expanded Nodes: " << expandedNodes << endl;
-    fout << "Running Time: " << runningTime << " sec" << endl;
-    fout.close();
+    fout << "-- Cost (Total Clause Checks):\n\t" << totalClauseChecks << endl;
+    fout << "-- Expanded Nodes:\n\t" << expandedNodes << endl;
 
-    cout << "Results written to " << resultFile << endl;
+    auto end = high_resolution_clock::now();
+    auto duration = duration_cast<milliseconds>(end - start);
+    fout << "-- Running Time:\n\t" << duration.count() << " ms" << endl;
+
+    fout.close();
+    cout << "Answer had written in " << resultFile << endl;
     return 0;
 }

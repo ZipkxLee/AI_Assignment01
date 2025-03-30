@@ -6,14 +6,17 @@
 #include <ctime>
 #include <cstdlib>
 #include <filesystem>
+#include <chrono>
 
 using namespace std;
+using namespace std::chrono;
 namespace fs = std::filesystem;
 
 int D;
 int clauses[1000][3];
 int clauseCount = 0;
 long long expandedNodes = 0;
+long long totalClauseChecks = 0; // 🔸 新增：總比對次數
 
 struct Node {
     vector<int> solution;
@@ -40,6 +43,7 @@ int catchDimFromFilename(const string& filename) {
 
 // 檢查單一子句是否被滿足
 bool checkClause(const vector<int>& sol, int a, int b, int c) {
+    totalClauseChecks++;  // 🔸 每次比對都累加
     auto getVal = [&](int var) -> int {
         int idx = abs(var) - 1;
         if (idx >= sol.size()) return 0; // 未指派，當成 false
@@ -95,9 +99,10 @@ string encodeState(const vector<int>& sol) {
 }
 
 int main() {
+    auto start = high_resolution_clock::now();
     string fileName;
     string defaultPath = "./data/3SAT_Dim=10.csv"; 
-    cout << "CSV file path ( press enter for the default path: \"" << defaultPath <<  "\"): ";
+    cout << "CSV file path ( press enter for the default path: \"" << defaultPath << "\"): ";
     getline(cin, fileName);
     if (fileName.empty()) fileName = defaultPath;
 
@@ -109,7 +114,7 @@ int main() {
 
     ifstream fin(fileName);
     if (!fin) {
-        cout << "Error opening file:" << fileName << endl;
+        cout << "Error opening file: " << fileName << endl;
         return 1;
     }
 
@@ -125,11 +130,7 @@ int main() {
 
     // 建立輸出資料夾
     fs::path outDir = "results/Astar";
-    if (!fs::exists(outDir)) {
-        fs::create_directories(outDir);
-    }
-
-    clock_t start = clock();
+    if (!fs::exists(outDir)) fs::create_directories(outDir);
 
     priority_queue<Node> openList;
     unordered_set<string> visited;
@@ -170,26 +171,32 @@ int main() {
         }
     }
 
-    clock_t end = clock();
-    double runningTime = (double)(end - start) / CLOCKS_PER_SEC;
+    auto end = high_resolution_clock::now();
+    auto duration = duration_cast<milliseconds>(end - start);
 
     string resultFile = (outDir / ("Result_Dim=" + to_string(D) + ".txt")).string();
     ofstream fout(resultFile);
 
     if (found) {
-        fout << "Answer found:\n";
+        fout << "-- Answer Found:" << endl;
         for (int i = 0; i < D; i++)
-            fout << "x" << (i + 1) << ": " << (bestNode.solution[i] == 1 ? "True" : "False") << endl;
-        fout << "Cost (Satisfied clauses): " << clauseCount << " / " << clauseCount << endl;
+            fout << "\tx" << (i + 1) << ": " << (bestNode.solution[i] == 1 ? "True" : "False") << endl;
+
+        fout << "-- Vector View: \n\t{ ";
+        for (int i = 0; i < D; i++)
+            fout << (bestNode.solution[i] == 1 ? "1 " : "0 ");
+        fout << "}" << endl;
+
+        fout << "-- Cost(Total Clause Checks):\n\t" << totalClauseChecks  << endl;
     } else {
-        fout << "No answer found.\n";
-        fout << "Best Cost Found: " << bestNode.g << " / " << clauseCount << endl;
+        fout << "-- No answer found.\n";
+        fout << "-- Best Cost Found:\n\t" << bestNode.g << " / " << clauseCount << endl;
     }
 
-    fout << "Expanded Nodes: " << expandedNodes << endl;
-    fout << "Running Time: " << runningTime << " sec" << endl;
-    fout.close();
+    fout << "-- Expanded Nodes:\n\t" << expandedNodes << endl;
+    fout << "-- Running Time:\n\t" << duration.count() << " ms" << endl;
 
+    fout.close();
     cout << "Answer had written in " << resultFile << endl;
     return 0;
 }

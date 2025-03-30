@@ -5,16 +5,17 @@
 #include <ctime>
 #include <cstdlib>
 #include <filesystem>
+#include <chrono>
 
 using namespace std;
+using namespace std::chrono;
 namespace fs = std::filesystem;
 
 int D;
 int clauses[1000][3];
 int clauseCount = 0;
 long long expandedNodes = 0;
-const int maxOpenSize = 2048;
-
+long long totalClauseChecks = 0;  // Clause 檢查總次數
 
 struct Node {
     vector<int> solution;
@@ -34,9 +35,10 @@ int catchDimFromFilename(const string& filename) {
 }
 
 bool checkClause(const vector<int>& sol, int a, int b, int c) {
+    totalClauseChecks++;  // 統計 clause 檢查次數
     auto getVal = [&](int var) -> int {
         int idx = abs(var) - 1;
-        if (idx >= sol.size()) return 0;  // 未指定 → 回傳 false
+        if (idx >= sol.size()) return 0;
         int val = sol[idx];
         return (var > 0) ? val : -val;
     };
@@ -79,9 +81,10 @@ int heuristic(const vector<int>& sol) {
 }
 
 int main() {
+    auto start = high_resolution_clock::now();
     string fileName;
     string defaultPath = "./data/3SAT_Dim=10.csv"; 
-    cout << "CSV file path ( press enter for the default path: \"" << defaultPath <<  "\"): ";
+    cout << "CSV file path ( press enter for the default path: \"" << defaultPath << "\"): ";
     getline(cin, fileName);
     if (fileName.empty()) fileName = defaultPath;
 
@@ -89,6 +92,7 @@ int main() {
     if (!fs::exists(outDir)) {
         fs::create_directories(outDir);
     }
+
     D = catchDimFromFilename(fileName);
     if (D <= 0) {
         cout << "Can't catch Dim from filename!" << endl;
@@ -110,8 +114,6 @@ int main() {
         clauseCount++;
     }
     fin.close();
-
-    clock_t start = clock();
 
     priority_queue<Node> openList;
     openList.push({{}, heuristic({})});
@@ -138,41 +140,43 @@ int main() {
             continue;
         }
 
-        // expand True
+        // Expand True
         vector<int> solTrue = current.solution;
         solTrue.push_back(1);
         if (isValidPartialAssignment(solTrue))
             openList.push({solTrue, heuristic(solTrue)});
 
-        // expand False
+        // Expand False
         vector<int> solFalse = current.solution;
         solFalse.push_back(-1);
         if (isValidPartialAssignment(solFalse))
             openList.push({solFalse, heuristic(solFalse)});
-
-        while (openList.size() > maxOpenSize) openList.pop();
     }
 
-    clock_t end = clock();
-    double runningTime = (double)(end - start) / CLOCKS_PER_SEC;
-
-    string resultFile = ( outDir / ("Result_Dim=" + to_string(D) + ".txt")).string();
+    string resultFile = (outDir / ("Result_Dim=" + to_string(D) + ".txt")).string();
     ofstream fout(resultFile);
 
     if (found) {
-        fout << "Solution found:\n";
+        fout << "-- Answer found:" << endl;
         for (int i = 0; i < D; i++)
-            fout << "x" << (i + 1) << ": " << (bestSolution[i] == 1 ? "True" : "False") << endl;
-        fout << "Cost (Satisfied clauses): " << clauseCount << " / " << clauseCount << endl;
+            fout << "\tx" << (i + 1) << ": " << (bestSolution[i] == 1 ? "True" : "False") << endl;
+        fout << "-- Vector View: " << endl << "\t{ ";
+        for (int i = 0; i < D; i++)
+            fout << (bestSolution[i] == 1 ? "1 " : "0 ");
+        fout << "}" << endl;        
+        fout << "-- Cost(Total Clause Check): " << endl << "\t" << totalClauseChecks << endl;
     } else {
-        fout << "No solution found.\n";
-        fout << "Best Heuristic Found: " << bestHeuristic << " / " << clauseCount << endl;
+        fout << "No solution found." << endl;
+        fout << "-- Best Heuristic Found: " << endl << "\t" << bestHeuristic << " / " << clauseCount << endl;
+        fout << "-- Cost(Total Clause Check): " << endl << "\t" << totalClauseChecks << endl;
     }
 
-    fout << "Expanded Nodes: " << expandedNodes << endl;
-    fout << "Running Time: " << runningTime << " sec" << endl;
-    fout.close();
+    fout << "-- Expanded Nodes: " << endl << "\t" << expandedNodes << endl;
+    auto end = high_resolution_clock::now();
+    auto duration = duration_cast<milliseconds>(end - start);
+    fout << "-- Running Time: " << endl << "\t" << duration.count() << " ms" << endl;
 
-    cout << "Results written to " << resultFile << endl;
+    fout.close();
+    cout << "Answer had written in " << resultFile << endl;
     return 0;
 }
