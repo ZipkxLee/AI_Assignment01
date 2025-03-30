@@ -32,6 +32,12 @@
 			<Add option="-Weverything" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Astar.cpp" />
+		<Unit filename="BFS.cpp" />
+		<Unit filename="DFS.cpp" />
+		<Unit filename="Verify.cpp" />
+		<Unit filename="common.cpp" />
+		<Unit filename="common.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
