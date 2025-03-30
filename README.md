@@ -40,8 +40,9 @@ No external libraries needed
       ./results/DFS/Result_Dim=10.txt
 
 *Notes*
-If you press Enter without typing a path, it uses the default path:
-./data/3SAT_Dim=10.csv
-The Verifier checks whether the vector view in the result file satisfies all the original 3SAT clauses.
-Ensure the CSV files follow the correct format (each clause with three literals, comma-separated).
-To add new instances, place them under the /data/ folder with filenames like 3SAT_Dim=20.csv.
+
+- If you press Enter without typing a path, it uses the default path:
+    ./data/3SAT_Dim=10.csv
+- The Verifier checks whether the vector view in the result file satisfies all the original 3SAT clauses.
+- Ensure the CSV files follow the correct format (each clause with three literals, comma-separated).
+- To add new instances, place them under the /data/ folder with filenames like 3SAT_Dim=20.csv.
