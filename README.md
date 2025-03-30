@@ -4,14 +4,14 @@ This project is developed for Assignment 01 of the 11302_AI_Concept course.
 It implements three classic AI search algorithms: DFS, BFS, and A*, and includes a result verifier to validate solutions for 3SAT problems.
 
 *Project Structure*
--main.cpp – Main interface (menu-driven)
--DFS.cpp – Depth-First Search algorithm
--BFS.cpp – Breadth-First Search algorithm
--Astar.cpp – A* Search algorithm
--Verify.cpp – Validates the result output
--common.h / common.cpp – Shared utilities and global variables
--/data/ – Contains input CSV files with 3SAT clauses
--/results/ – Output folder for generated solution files
+   main.cpp – Main interface (menu-driven)
+   DFS.cpp – Depth-First Search algorithm
+   BFS.cpp – Breadth-First Search algorithm
+   Astar.cpp – A* Search algorithm
+   Verify.cpp – Validates the result output
+   common.h / common.cpp – Shared utilities and global variables
+   /data/ – Contains input CSV files with 3SAT clauses
+   /results/ – Output folder for generated solution files
 
 *Requirements*
 Code::Blocks IDE (with MinGW or any C++17-compliant compiler)
