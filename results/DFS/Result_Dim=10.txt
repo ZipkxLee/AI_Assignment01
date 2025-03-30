@@ -16,4 +16,4 @@ Answer Found:
 -- Expanded Nodes:
 	58
 -- Running Time:
-	867 ms
+	2243 ms

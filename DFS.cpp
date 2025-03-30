@@ -15,7 +15,7 @@ int D = 0, clauseCount = 0;
 int clauses[1000][3];
 int solution[100];
 long long expandedNodes = 0;
-long long totalClauseChecks = 0;  // ✓ Total checks in all stages
+long long totalClauseChecks = 0;  
 bool found = false;
 
 int catchDimFromFilename(const string& filename) {
@@ -127,7 +127,8 @@ int main() {
     bool isFound = dfs(0);
     int cost = satisfiedClauses();
 
-    string resultFile = (outDir / ("Result_Dim=" + to_string(D) + ".txt")).string();
+    string resultFile = ( outDir / ("Result_Dim=" + to_string(D) + ".txt")).string();
+    // string resultFile = "Result_Dim=" + to_string(D) + ".txt";
     ofstream fout(resultFile);
 
     if (isFound) {
