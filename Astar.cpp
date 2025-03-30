@@ -8,16 +8,6 @@
 #include <filesystem>
 #include <chrono>
 
-using namespace std;
-using namespace std::chrono;
-namespace fs = std::filesystem;
-
-int D;
-int clauses[1000][3];
-int clauseCount = 0;
-long long expandedNodes = 0;
-long long totalClauseChecks = 0; // 🔸 新增：總比對次數
-
 struct Node {
     vector<int> solution;
     int g;  // cost so far（目前已滿足的子句數）
@@ -101,7 +91,7 @@ string encodeState(const vector<int>& sol) {
 int main() {
     auto start = high_resolution_clock::now();
     string fileName;
-    string defaultPath = "./data/3SAT_Dim=10.csv"; 
+    string defaultPath = "./data/3SAT_Dim=10.csv";
     cout << "CSV file path ( press enter for the default path: \"" << defaultPath << "\"): ";
     getline(cin, fileName);
     if (fileName.empty()) fileName = defaultPath;
