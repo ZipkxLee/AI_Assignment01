@@ -9,18 +9,31 @@ The 3-SAT problem is a specific case of the Boolean satisfiability problem (SAT)
 *Folder Structure*
 
 Assignment01/
+
 ├── datas/             # Contains test data (CSV format)
+
 │   └── 3SAT_Dim=30.csv
+
 ├── results/           # Contains the output of search results (automatically generated)
+
 │   ├── DFS/
+
 │   ├── BFS/
+
 │   └── Astar/
+
 ├── Header/            # Header files for the algorithms and common functions (.h)
+
 │   ├── common.h
+
 │   ├── dfs.h
+
 │   ├── bfs.h
+
 │   └── astar.h
+
 ├── sources/           # Main program (main.cpp)
+
 └── README.md
 
 *Compilation Requirements*
