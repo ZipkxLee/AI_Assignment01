@@ -22,17 +22,15 @@ Assignment01/
 
 │   └── Astar/
 
-├── Header/            # Header files for the algorithms and common functions (.h)
+├── common.h
 
-│   ├── common.h
+├── dfs.h
 
-│   ├── dfs.h
+├── bfs.h
 
-│   ├── bfs.h
+├── astar.h
 
-│   └── astar.h
-
-├── sources/           # Main program (main.cpp)
+├── main.cpp
 
 └── README.md
 
