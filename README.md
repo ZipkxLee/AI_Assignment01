@@ -1,4 +1,4 @@
-***AI Assignment01 - Solving 3-SAT with DFS / BFS / A* Search
+** AI Assignment01 - Solving 3-SAT with DFS / BFS / A* Search **
 
 This project is the assignment for the "Introduction to Artificial Intelligence" course at Fu Jen Catholic University. The goal is to use three classic search algorithms (DFS, BFS, and A*) to solve the Boolean 3-SAT problem and compare their performance.
 
