@@ -72,9 +72,10 @@ Input Format
   
 Example:
 
-Dim=30
 1,-3,4
+
 -2,-4,5
+
 3,-1,2
 
 Output Format
@@ -82,21 +83,30 @@ Output Format
 The result will be saved in the corresponding folder within `results/` as `result_Dim=XX.txt`. The format is as follows:
 
 -- Answer Found:
+
 	x1: False
+
 	x2: True
+
 	...
+
 	x30: True
 
+
 -- Vector View:
+
 	{ 0 1 0 1 1 ... }
 
 -- Total Clause Cost:
+
 	12345678
 
 -- Expanded Nodes:
+
 	314159
 
 -- Running Time:
+
 	987 ms
 
 Special Features
@@ -123,8 +133,11 @@ The program will ask you to select the algorithm:
 
 Select the algorithm:
 1: DFS
+
 2: BFS
+
 3: A*
+
 4: Exit
 Enter your choice:
 
@@ -144,7 +157,9 @@ The input data must be a CSV file with each subsequent line represents a clause,
 Example CSV file (3SAT_Dim=30.csv):
 
 1,-3,4
+
 -2,-4,5
+
 3,-1,2
 
 *Output Data Format*
