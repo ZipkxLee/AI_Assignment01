@@ -41,7 +41,7 @@ Assignment01/
 
 *Recommended Compilation Command:*
 
-g++ sources/main.cpp -I Header -std=c++17 -o sat_solver
+g++ main.cpp -I Header -std=c++17 -o sat_solver
 
 *Usage Instructions*
 
@@ -119,7 +119,7 @@ Special Features
 1. Compile the Code
 Ensure your compiler supports C++17 or higher and has the `<filesystem>` header.
 
-g++ sources/main.cpp -I Header -std=c++17 -o sat_solver
+g++  main.cpp -I Header -std=c++17 -o sat_solver
 
 2. Run the Program
 After compilation, run the program:
