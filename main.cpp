@@ -19,7 +19,6 @@ using namespace std;
 
 int main() {
     while (true) {
-        // 先讓使用者選擇演算法
         cout << "\nSelect the algorithm:" << endl;
         cout << "1: DFS" << endl;
         cout << "2: BFS" << endl;
@@ -38,14 +37,12 @@ int main() {
             continue;
         }
 
-        // 先提示使用者輸入資料檔案路徑，若直接按 Enter 則使用預設路徑
         string filename;
         cout << "\nEnter the data file path (default: ./datas/3SAT_Dim=30.csv): ";
         getline(cin, filename);
         if (filename.empty())
             filename = "./datas/3SAT_Dim=30.csv";
 
-        // 解析維度值
         int dim = readDimensionFromFilename(filename);
         if (dim <= 0) {
             cerr << "Failed to read a valid Dimension value from filename." << endl;
@@ -58,12 +55,10 @@ int main() {
             continue;
         }
 
-        // 自動建立結果資料夾
         fs::create_directories("results/DFS");
         fs::create_directories("results/BFS");
         fs::create_directories("results/Astar");
 
-        // 先計算靜態排序（根據變數出現頻率排序）
         vector<int> staticOrder = computeStaticOrder(clauses, dim);
 
         long long totalClauseCost = 0;

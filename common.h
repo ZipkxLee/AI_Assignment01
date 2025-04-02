@@ -110,15 +110,12 @@ inline vector<int> computeStaticOrder(const vector<Clause>& clauses, int dim) {
     return order;
 }
 
-// Combined variable ordering: 結合靜態與動態排序。
-// 如果未指派變數超過一定門檻（例如80%），則使用靜態排序 (從 staticOrder 中取第一個未指派變數)；否則進行完整的動態排序。
 inline int selectCombinedVariable(const vector<Clause>& clauses, const Assignment &assign, int dim, long long &clauseChecks, const vector<int>& staticOrder) {
     int unassignedCount = 0;
     for (int i = 0; i < dim; i++) {
         if (assign[i] == -1)
             unassignedCount++;
     }
-    // 若未指派變數超過80%，使用靜態排序（預先計算的頻率排序）
     if (unassignedCount > (int)(0.8 * dim)) {
         for (int idx : staticOrder) {
             if (assign[idx] == -1)
@@ -126,7 +123,6 @@ inline int selectCombinedVariable(const vector<Clause>& clauses, const Assignmen
         }
     }
 
-    // 否則，進行完整的動態排序計算
     int bestIdx = -1;
     int bestScore = -1;
     for (int i = 0; i < dim; i++) {
@@ -170,8 +166,6 @@ inline int selectCombinedVariable(const vector<Clause>& clauses, const Assignmen
     return bestIdx;
 }
 
-// Unit Clause Propagation:
-// For each unsatisfied clause with only one unassigned variable, assign that variable accordingly.
 inline bool unitPropagation(const vector<Clause>& clauses, Assignment &assign, long long &clauseChecks) {
     bool updated = true;
     int dim = assign.size();

@@ -36,4 +36,4 @@
 -- Expanded Nodes:
 	5009
 -- Running Time:
-	31.7211 ms
+	21.0723 ms
