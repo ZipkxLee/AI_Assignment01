@@ -1,29 +1,29 @@
--- Answer found:
-	x1: False
+-- Answer Found:
+	x1: True
 	x2: True
-	x3: True
-	x4: False
+	x3: False
+	x4: True
 	x5: False
-	x6: True
+	x6: False
 	x7: False
-	x8: False
-	x9: False
+	x8: True
+	x9: True
 	x10: False
-	x11: True
-	x12: True
+	x11: False
+	x12: False
 	x13: False
-	x14: False
+	x14: True
 	x15: False
-	x16: False
+	x16: True
 	x17: False
 	x18: False
-	x19: True
-	x20: False
--- Vector View: 
-	{ 0 1 1 0 0 1 0 0 0 0 1 1 0 0 0 0 0 0 1 0 }
--- Cost(Total Clause Check): 
-	16080
--- Expanded Nodes: 
-	191
--- Running Time: 
-	2676 ms
+	x19: False
+	x20: True
+-- Vector View:
+	{ 1 1 0 1 0 0 0 1 1 0 0 0 0 1 0 1 0 0 0 1 }
+-- Total Clause Cost:
+	34553
+-- Expanded Nodes:
+	89
+-- Running Time:
+	1.0234 ms

@@ -6,7 +6,7 @@
 	x5: False
 	x6: False
 	x7: False
-	x8: False
+	x8: True
 	x9: True
 	x10: False
 	x11: False
@@ -19,11 +19,11 @@
 	x18: False
 	x19: False
 	x20: True
--- Vector View: 
-	{ 1 1 0 1 0 0 0 0 1 0 0 0 0 1 0 1 0 0 0 1 }
--- Cost(Total Clause Checks):
-	158000
+-- Vector View:
+	{ 1 1 0 1 0 0 0 1 1 0 0 0 0 1 0 1 0 0 0 1 }
+-- Total Clause Cost:
+	34553
 -- Expanded Nodes:
-	972
+	89
 -- Running Time:
-	549 ms
+	0.9464 ms

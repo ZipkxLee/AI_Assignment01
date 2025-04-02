@@ -29,11 +29,11 @@
 	x28: False
 	x29: True
 	x30: False
--- Vector View: 
+-- Vector View:
 	{ 0 1 0 0 1 0 0 1 0 0 0 1 1 0 0 0 0 1 0 1 0 1 1 0 1 0 1 0 1 0 }
--- Cost(Total Clause Checks):
-	10532280
+-- Total Clause Cost:
+	2165306
 -- Expanded Nodes:
-	43855
+	5010
 -- Running Time:
-	1865 ms
+	31.3594 ms

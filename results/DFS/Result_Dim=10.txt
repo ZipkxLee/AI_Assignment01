@@ -1,4 +1,4 @@
-Answer Found:
+-- Answer Found:
 	x1: True
 	x2: False
 	x3: False
@@ -11,9 +11,9 @@ Answer Found:
 	x10: False
 -- Vector View:
 	{ 1 0 0 1 0 0 1 0 1 0 }
--- Cost (Total Clause Checks):
-	3472
+-- Total Clause Cost:
+	329
 -- Expanded Nodes:
-	58
+	2
 -- Running Time:
-	2243 ms
+	0.0145 ms

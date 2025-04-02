@@ -1,6 +1,6 @@
-Answer Found:
-	x1: True
-	x2: True
+-- Answer Found:
+	x1: False
+	x2: False
 	x3: False
 	x4: False
 	x5: True
@@ -11,7 +11,7 @@ Answer Found:
 	x10: False
 	x11: False
 	x12: True
-	x13: True
+	x13: False
 	x14: False
 	x15: False
 	x16: False
@@ -30,10 +30,10 @@ Answer Found:
 	x29: True
 	x30: False
 -- Vector View:
-	{ 1 1 0 0 1 0 0 1 0 0 0 1 1 0 0 0 0 1 0 1 0 1 1 0 1 0 1 0 1 0 }
--- Cost (Total Clause Checks):
-	5769683
+	{ 0 0 0 0 1 0 0 1 0 0 0 1 0 0 0 0 0 1 0 1 0 1 1 0 1 0 1 0 1 0 }
+-- Total Clause Cost:
+	81680
 -- Expanded Nodes:
-	33312
+	43
 -- Running Time:
-	1568 ms
+	1.381 ms

@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="assignment" />
+		<Option title="Assignment01" />
 		<Option pch_mode="2" />
 		<Option compiler="clang" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/assignment" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/Assignment01" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="clang" />
@@ -16,7 +16,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/assignment" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/Assignment01" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="clang" />
@@ -32,12 +32,6 @@
 			<Add option="-Weverything" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="Astar.cpp" />
-		<Unit filename="BFS.cpp" />
-		<Unit filename="DFS.cpp" />
-		<Unit filename="Verify.cpp" />
-		<Unit filename="common.cpp" />
-		<Unit filename="common.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

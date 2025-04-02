@@ -1,5 +1,5 @@
 -- Answer Found:
-	x1: False
+	x1: True
 	x2: False
 	x3: True
 	x4: True
@@ -13,7 +13,7 @@
 	x12: False
 	x13: False
 	x14: False
-	x15: False
+	x15: True
 	x16: True
 	x17: True
 	x18: True
@@ -31,19 +31,19 @@
 	x30: False
 	x31: True
 	x32: False
-	x33: True
+	x33: False
 	x34: False
 	x35: False
 	x36: False
-	x37: True
+	x37: False
 	x38: True
-	x39: False
+	x39: True
 	x40: True
--- Vector View: 
-	{ 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 1 1 1 0 1 1 0 0 0 1 1 0 0 0 0 1 0 1 0 0 0 1 1 0 1 }
--- Cost(Total Clause Checks):
-	122470240
+-- Vector View:
+	{ 1 0 1 1 0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 1 1 0 0 0 1 1 0 0 0 0 1 0 0 0 0 0 0 1 1 1 }
+-- Total Clause Cost:
+	3727647
 -- Expanded Nodes:
-	382664
+	6153
 -- Running Time:
-	5111 ms
+	67.2428 ms

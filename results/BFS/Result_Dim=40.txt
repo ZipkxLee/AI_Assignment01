@@ -1,49 +1,49 @@
--- Answer found:
-	x1: False
-	x2: True
+-- Answer Found:
+	x1: True
+	x2: False
 	x3: True
 	x4: True
 	x5: False
 	x6: False
 	x7: False
-	x8: True
+	x8: False
 	x9: False
 	x10: False
 	x11: False
-	x12: True
+	x12: False
 	x13: False
 	x14: False
-	x15: False
+	x15: True
 	x16: True
-	x17: False
-	x18: False
-	x19: True
+	x17: True
+	x18: True
+	x19: False
 	x20: True
-	x21: False
+	x21: True
 	x22: False
 	x23: False
-	x24: True
+	x24: False
 	x25: True
 	x26: True
 	x27: False
-	x28: True
-	x29: True
+	x28: False
+	x29: False
 	x30: False
 	x31: True
-	x32: True
-	x33: True
+	x32: False
+	x33: False
 	x34: False
 	x35: False
 	x36: False
-	x37: True
+	x37: False
 	x38: True
-	x39: False
+	x39: True
 	x40: True
--- Vector View: 
-	{ 0 1 1 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 1 1 0 0 0 1 1 1 0 1 1 0 1 1 1 0 0 0 1 1 0 1 }
--- Cost(Total Clause Check): 
-	11040
--- Expanded Nodes: 
-	41
--- Running Time: 
-	1447 ms
+-- Vector View:
+	{ 1 0 1 1 0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 1 1 0 0 0 1 1 0 0 0 0 1 0 0 0 0 0 0 1 1 1 }
+-- Total Clause Cost:
+	3727647
+-- Expanded Nodes:
+	6153
+-- Running Time:
+	42.1538 ms
